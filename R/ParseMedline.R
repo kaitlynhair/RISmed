@@ -254,15 +254,15 @@ if(!is.null(x$MedlineCitation$Article$Abstract)){
 Fields[["Language"]] <- x$MedlineCitation$Article$Language[[1]]
 if(!is.null(x$MedlineCitation$Article$PublicationTypeList))
 	Fields[["PublicationType"]] <- unlist(x$MedlineCitation$Article$PublicationTypeList[names(x$MedlineCitation$Article$PublicationTypeList) == "PublicationType"])
-Fields[["Country"]] <- x$MedlineCitation$MedlineJournalInfo$Country[[1]]
-Fields[["MedlineTA"]] <- x$MedlineCitation$MedlineJournalInfo$MedlineTA[[1]]
-Fields[["NlmUniqueID"]] <- x$MedlineCitation$MedlineJournalInfo$NlmUniqueID[[1]]
-Fields[["ISSNLinking"]] <- x$MedlineCitation$MedlineJournalInfo$ISSNLinking[[1]]
-Fields[["PublicationStatus"]] <- x$PubmedData$PublicationStatus[[1]]
-Fields[["ArticleId"]] <- x$PubmedData$ArticleIdList$ArticleId[[1]]
-Fields[["ISOAbbreviation"]] <- x$MedlineCitation$Article$Journal$ISOAbbreviation[[1]]
-Fields[["MedlinePgn"]] <- x$MedlineCitation$Article$Pagination$MedlinePgn[[1]]
-Fields[["CopyrightInformation"]] <- x$MedlineCitation$Article$Abstract$CopyrightInformation[[1]]
+try(Fields[["Country"]] <- x$MedlineCitation$MedlineJournalInfo$Country[[1]], silent=TRUE)
+try(Fields[["MedlineTA"]] <- x$MedlineCitation$MedlineJournalInfo$MedlineTA[[1]], silent=TRUE)
+try(Fields[["NlmUniqueID"]] <- x$MedlineCitation$MedlineJournalInfo$NlmUniqueID[[1]], silent=TRUE)
+try(Fields[["ISSNLinking"]] <- x$MedlineCitation$MedlineJournalInfo$ISSNLinking[[1]], silent=TRUE)
+try(Fields[["PublicationStatus"]] <- x$PubmedData$PublicationStatus[[1]], silent=TRUE)
+try(Fields[["ArticleId"]] <- x$PubmedData$ArticleIdList$ArticleId[[1]], silent=TRUE)
+try(Fields[["ISOAbbreviation"]] <- x$MedlineCitation$Article$Journal$ISOAbbreviation[[1]], silent=TRUE)
+try(Fields[["MedlinePgn"]] <- x$MedlineCitation$Article$Pagination$MedlinePgn[[1]], silent=TRUE)
+try(Fields[["CopyrightInformation"]] <- x$MedlineCitation$Article$Abstract$CopyrightInformation[[1]], silent=TRUE)
 
 
 if(!is.null(x$MedlineCitation$Article$GrantList)){
