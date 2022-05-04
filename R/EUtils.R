@@ -131,28 +131,55 @@ EUtilsGet <- function(x, type="efetch", db="pubmed"){
 	  }
 	}
 	
-	                                            
+	country <- vector()
+	for(n in 1:length(records@Country)){
+	  try(tmp<-paste0(records@Country[[n]]), silent=TRUE)
+	  try(tmp2<-paste(tmp, collapse="; "), silent=TRUE)
+	  
+	  if(length(tmp2)>0){
+	    country<-append(country,tmp2)
+	  }
+	  
+	  else{
+	    country<-append(country,NA)
+	  }
+	}
+	
+	keywords<-vector()
+	for(n in 1:length(records@Keywords)){
+	  try(tmp<-paste0(records@Keywords[[n]]), silent=TRUE)
+	  try(tmp2<-paste(tmp, collapse="; "), silent=TRUE)
+	  
+	  if(length(tmp2)>0){
+	    keywords<-append(keywords,tmp2)
+	  }
+	  
+	  else{
+	    keywords<-append(keywords,NA)
+	  }
+	}
+	
+	
 	pubmed_data <- data.frame("author" = authors,
+	                          "keywords" = keywords,
+	                          "abstract" = AbstractText(records),
+	                          "country" = country,
 	                          "title" = ArticleTitle(records),
 	                          "pages" = MedlinePgn(records),
 	                          "issue" = Issue(records), 
 	                          "volume" = Volume(records),
 	                          "year" = YearPubmed(records),
 	                          "pmid" = PMID(records),
-	                          "doi" = ELocationID(records),
+	                          "doi" = DOI(records),
 	                          "issn" = ISSN(records),
-	                          "keywords" = Keywords(records),
-	                          "affiliation" = Affiliation(records),
-	                          "country" = Country(records),
-	                          "pub_type" = PublicationType(records),
-	                          "pub_status" = PublicationStatus(records),
-	                          "journal_publisher" = BookPublisher(records),
-	                          "journal" = BookTitle(records)
-	                          )
+	                          "journal" = MedlineTA(records))
+	
 	
 	pubmed_data <- pubmed_data %>%
 	  mutate(url= paste0("https://www.ncbi.nlm.nih.gov/pubmed/",
-	                     PMID(records)))
+	                     PMID(records))) 
+	
+	pubmed_data[pubmed_data == "NA" ] <- NA
 	
 	pubmed_data
 }
