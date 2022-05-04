@@ -141,13 +141,13 @@ EUtilsGet <- function(x, type="efetch", db="pubmed"){
 	                    length(ELocationID(records))))
 	                                            
 	pubmed_data <- data.frame("author" = authors,
-	                          "title" = c(ArticleTitle(records),rep(NA, max_length - length(ArticleTitle(records)))),
-	                          "pages" = c(MedlinePgn(records),rep(NA, max_length - length(MedlinePgn(records)))),
-	                          "issue" = c(Issue(records) ,rep(NA, max_length - length(Issue(records)))),
-	                          "volume" = c(Volume(records),rep(NA, max_length - length(Volume(records)))),
-	                          "year" = c(YearPubmed(records),rep(NA, max_length - length(YearPubmed(records)))),
-	                          "pmid" = c(PMID(records),rep(NA, max_length - length(PMID(records)))),
-	                          "doi" = c(ELocationID(records),rep(NA, max_length - length(ELocationID(records)))))
+	                          "title" = ArticleTitle(records),
+	                          "pages" = MedlinePgn(records),
+	                          "issue" = Issue(records), 
+	                          "volume" = Volume(records),
+	                          "year" = YearPubmed(records),
+	                          "pmid" = PMID(records),
+	                          "doi" = ELocationID(records))
 	
 	pubmed_data <- pubmed_data %>%
 	  mutate(url= paste0("https://www.ncbi.nlm.nih.gov/pubmed/",
