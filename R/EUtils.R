@@ -118,20 +118,17 @@ EUtilsGet <- function(x, type="efetch", db="pubmed"){
 	}
 			
 	authors<-vector()
-	author1<-vector()
 	for(n in 1:length(records@Author)){
 	  try(tmp<-paste0(records@Author[[n]]$LastName,", ",records@Author[[n]]$Initials), silent=TRUE)
 	  try(tmp2<-paste(tmp, collapse="; "), silent=TRUE)
 	  
-	  if(length(tmp2)>1){
+	  if(length(tmp2)>0){
 	    authors<-append(authors,tmp2)
 	  }
 	  
 	  else{
 	    authors<-append(authors,NA)
 	  }
-	  
-	  try(author1<-append(author1,records@Author[[n]]$LastName[1]), silent=TRUE)
 	}
 	
 	max_length <- max(c(length(authors), 
