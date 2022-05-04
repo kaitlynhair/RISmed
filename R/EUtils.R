@@ -147,7 +147,16 @@ EUtilsGet <- function(x, type="efetch", db="pubmed"){
 	                          "volume" = Volume(records),
 	                          "year" = YearPubmed(records),
 	                          "pmid" = PMID(records),
-	                          "doi" = ELocationID(records))
+	                          "doi" = ELocationID(records),
+	                          "issn" = ISSN(records),
+	                          "keywords" = Keywords(records),
+	                          "affiliation" = Affiliation(records),
+	                          "country" = Country(records),
+	                          "pub_type" = PublicationType(records),
+	                          "pub_status" = PublicationStatus(records),
+	                          "journal_publisher" = BookPublisher(records),
+	                          "journal" = BookTitle(records)
+	                          )
 	
 	pubmed_data <- pubmed_data %>%
 	  mutate(url= paste0("https://www.ncbi.nlm.nih.gov/pubmed/",
