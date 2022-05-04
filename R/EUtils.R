@@ -131,14 +131,6 @@ EUtilsGet <- function(x, type="efetch", db="pubmed"){
 	  }
 	}
 	
-	max_length <- max(c(length(authors), 
-	                    length(ArticleTitle(records)),
-	                    length(MedlinePgn(records)), 
-	                    length(Issue(records)),
-	                    length(Volume(records)),
-	                    length(YearPubmed(records)),
-	                    length(PMID(records)),
-	                    length(ELocationID(records))))
 	                                            
 	pubmed_data <- data.frame("author" = authors,
 	                          "title" = ArticleTitle(records),
