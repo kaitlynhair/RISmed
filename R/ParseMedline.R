@@ -96,17 +96,17 @@ Fields <- vector(mode = "list", length = length(Tags))
 names(Fields) <- Tags
 
 
-Fields[["PMID"]] <- x$MedlineCitation$PMID[[1]]
+try(Fields[["PMID"]] <- x$MedlineCitation$PMID[[1]], silent=TRUE) 
 
-Fields[["YearRevised"]] <- x$MedlineCitation$DateRevised$Year[[1]]
-Fields[["MonthRevised"]] <- x$MedlineCitation$DateRevised$Month[[1]]
-Fields[["DayRevised"]] <- x$MedlineCitation$DateRevised$Day[[1]]
-Fields[["YearPubDate"]] <- x$MedlineCitation$Article$Journal$JournalIssue$PubDate$Year[[1]]
-Fields[["MonthPubDate"]] <- x$MedlineCitation$Article$Journal$JournalIssue$PubDate$Month[[1]]
-Fields[["DayPubDate"]] <- x$MedlineCitation$Article$Journal$JournalIssue$PubDate$Day[[1]]
-Fields[["YearArticleDate"]] <- x$MedlineCitation$Article$ArticleDate$Year[[1]]
-Fields[["MonthArticleDate"]] <- x$MedlineCitation$Article$ArticleDate$Month[[1]]
-Fields[["DayArticleDate"]] <- x$MedlineCitation$Article$ArticleDate$Day[[1]]
+try(Fields[["YearRevised"]] <- x$MedlineCitation$DateRevised$Year[[1]], silent=TRUE) 
+try(Fields[["MonthRevised"]] <- x$MedlineCitation$DateRevised$Month[[1]], silent=TRUE) 
+try(Fields[["DayRevised"]] <- x$MedlineCitation$DateRevised$Day[[1]], silent=TRUE) 
+try(Fields[["YearPubDate"]] <- x$MedlineCitation$Article$Journal$JournalIssue$PubDate$Year[[1]], silent=TRUE) 
+try(Fields[["MonthPubDate"]] <- x$MedlineCitation$Article$Journal$JournalIssue$PubDate$Month[[1]], silent=TRUE) 
+try(Fields[["DayPubDate"]] <- x$MedlineCitation$Article$Journal$JournalIssue$PubDate$Day[[1]], silent=TRUE) 
+try(Fields[["YearArticleDate"]] <- x$MedlineCitation$Article$ArticleDate$Year[[1]], silent=TRUE) 
+try(Fields[["MonthArticleDate"]] <- x$MedlineCitation$Article$ArticleDate$Month[[1]], silent=TRUE) 
+try(Fields[["DayArticleDate"]] <- x$MedlineCitation$Article$ArticleDate$Day[[1]], silent=TRUE) 
 
 pubmed_states <- sapply(x$PubmedData$History, function(z) attr(z, "PubStatus"))
 
@@ -114,81 +114,81 @@ pubmed_states <- sapply(x$PubmedData$History, function(z) attr(z, "PubStatus"))
 if(length(pubmed_states) > 0){
 	if(any(pubmed_states == "entrez")){
 		i <- which(pubmed_states == "entrez")[1]
-		Fields[["YearEntrez"]] <- x$PubmedData$History[[i]]$Year[[1]]
-		Fields[["MonthEntrez"]] <- x$PubmedData$History[[i]]$Month[[1]]
-		Fields[["DayEntrez"]] <- x$PubmedData$History[[i]]$Day[[1]]
-		Fields[["MinuteEntrez"]] <- x$PubmedData$History[[i]]$Minute[[1]]
-		Fields[["HourEntrez"]] <- x$PubmedData$History[[i]]$Hour[[1]]
+		try(Fields[["YearEntrez"]] <- x$PubmedData$History[[i]]$Year[[1]], silent=TRUE) 
+		try(Fields[["MonthEntrez"]] <- x$PubmedData$History[[i]]$Month[[1]], silent=TRUE) 
+    try(Fields[["DayEntrez"]] <- x$PubmedData$History[[i]]$Day[[1]], silent=TRUE) 
+		try(Fields[["MinuteEntrez"]] <- x$PubmedData$History[[i]]$Minute[[1]], silent=TRUE) 
+		try(Fields[["HourEntrez"]] <- x$PubmedData$History[[i]]$Hour[[1]], silent=TRUE) 
 	}
 	
 	if(any(pubmed_states == "medline")){
 		i <- which(pubmed_states == "medline")[1]
-		Fields[["YearMedline"]] <- x$PubmedData$History[[i]]$Year[[1]]
-		Fields[["MonthMedline"]] <- x$PubmedData$History[[i]]$Month[[1]]
-		Fields[["DayMedline"]] <- x$PubmedData$History[[i]]$Day[[1]]
-		Fields[["MinuteMedline"]] <- x$PubmedData$History[[i]]$Minute[[1]]
-		Fields[["HourMedline"]] <- x$PubmedData$History[[i]]$Hour[[1]]
+		try(Fields[["YearMedline"]] <- x$PubmedData$History[[i]]$Year[[1]], silent=TRUE) 
+		try(Fields[["MonthMedline"]] <- x$PubmedData$History[[i]]$Month[[1]], silent=TRUE) 
+		try(Fields[["DayMedline"]] <- x$PubmedData$History[[i]]$Day[[1]], silent=TRUE) 
+		try(Fields[["MinuteMedline"]] <- x$PubmedData$History[[i]]$Minute[[1]], silent=TRUE) 
+		try(Fields[["HourMedline"]] <- x$PubmedData$History[[i]]$Hour[[1]], silent=TRUE) 
 	}	
 	
 	if(any(pubmed_states == "accepted")){
 		i <- which(pubmed_states == "accepted")[1]		
-		Fields[["YearAccepted"]] <- x$PubmedData$History[[i]]$Year[[1]]
-		Fields[["MonthAccepted"]] <- x$PubmedData$History[[i]]$Month[[1]]
-		Fields[["DayAccepted"]] <- x$PubmedData$History[[i]]$Day[[1]]
-		Fields[["MinuteAccepted"]] <- x$PubmedData$History[[i]]$Minute[[1]]
-		Fields[["HourAccepted"]] <- x$PubmedData$History[[i]]$Hour[[1]]
+		try(Fields[["YearAccepted"]] <- x$PubmedData$History[[i]]$Year[[1]], silent=TRUE) 
+		try(Fields[["MonthAccepted"]] <- x$PubmedData$History[[i]]$Month[[1]], silent=TRUE) 
+		try(Fields[["DayAccepted"]] <- x$PubmedData$History[[i]]$Day[[1]], silent=TRUE) 
+		try(Fields[["MinuteAccepted"]] <- x$PubmedData$History[[i]]$Minute[[1]], silent=TRUE) 
+		try(Fields[["HourAccepted"]] <- x$PubmedData$History[[i]]$Hour[[1]], silent=TRUE) 
 	}	
 	
 	if(any(pubmed_states == "received")){
 		i <- which(pubmed_states == "received")[1]
-		Fields[["YearReceived"]] <- x$PubmedData$History[[i]]$Year[[1]]
-		Fields[["MonthReceived"]] <- x$PubmedData$History[[i]]$Month[[1]]
-		Fields[["DayReceived"]] <- x$PubmedData$History[[i]]$Day[[1]]
-		Fields[["MinuteReceived"]] <- x$PubmedData$History[[i]]$Minute[[1]]
-		Fields[["HourReceived"]] <- x$PubmedData$History[[i]]$Hour[[1]]
+		try(Fields[["YearReceived"]] <- x$PubmedData$History[[i]]$Year[[1]], silent=TRUE) 
+		try(Fields[["MonthReceived"]] <- x$PubmedData$History[[i]]$Month[[1]], silent=TRUE) 
+		try(Fields[["DayReceived"]] <- x$PubmedData$History[[i]]$Day[[1]], silent=TRUE) 
+		try(Fields[["MinuteReceived"]] <- x$PubmedData$History[[i]]$Minute[[1]], silent=TRUE) 
+		try(Fields[["HourReceived"]] <- x$PubmedData$History[[i]]$Hour[[1]], silent=TRUE) 
 	}	
 	
 	if(any(pubmed_states == "epublish")){
 		i <- which(pubmed_states == "epublish")[1]
-		Fields[["YearEpublish"]] <- x$PubmedData$History[[i]]$Year[[1]]
-		Fields[["MonthEpublish"]] <- x$PubmedData$History[[i]]$Month[[1]]
-		Fields[["DayEpublish"]] <- x$PubmedData$History[[i]]$Day[[1]]
-		Fields[["MinuteEpublish"]] <- x$PubmedData$History[[i]]$Minute[[1]]
-		Fields[["HourEpublish"]] <- x$PubmedData$History[[i]]$Hour[[1]]
+		try(Fields[["YearEpublish"]] <- x$PubmedData$History[[i]]$Year[[1]], silent=TRUE) 
+		try(Fields[["MonthEpublish"]] <- x$PubmedData$History[[i]]$Month[[1]], silent=TRUE) 
+		try(Fields[["DayEpublish"]] <- x$PubmedData$History[[i]]$Day[[1]], silent=TRUE) 
+		try(Fields[["MinuteEpublish"]] <- x$PubmedData$History[[i]]$Minute[[1]], silent=TRUE) 
+		try(Fields[["HourEpublish"]] <- x$PubmedData$History[[i]]$Hour[[1]], silent=TRUE) 
 	}			
 
 	if(any(pubmed_states == "ppublish")){
 		i <- which(pubmed_states == "ppublish")[1]
-		Fields[["YearPpublish"]] <- x$PubmedData$History[[i]]$Year[[1]]
-		Fields[["MonthPpublish"]] <- x$PubmedData$History[[i]]$Month[[1]]
-		Fields[["DayPpublish"]] <- x$PubmedData$History[[i]]$Day[[1]]
-		Fields[["MinutePpublish"]] <- x$PubmedData$History[[i]]$Minute[[1]]
-		Fields[["HourPpublish"]] <- x$PubmedData$History[[i]]$Hour[[1]]
+		try(Fields[["YearPpublish"]] <- x$PubmedData$History[[i]]$Year[[1]], silent=TRUE) 
+		try(Fields[["MonthPpublish"]] <- x$PubmedData$History[[i]]$Month[[1]], silent=TRUE) 
+		try(Fields[["DayPpublish"]] <- x$PubmedData$History[[i]]$Day[[1]], silent=TRUE) 
+		try(Fields[["MinutePpublish"]] <- x$PubmedData$History[[i]]$Minute[[1]], silent=TRUE) 
+		try(Fields[["HourPpublish"]] <- x$PubmedData$History[[i]]$Hour[[1]], silent=TRUE) 
 	}	
 	
 	if(any(pubmed_states == "pmc")){
 		i <- which(pubmed_states == "pmc")
-		Fields[["YearPmc"]] <- x$PubmedData$History[[i]]$Year[[1]]
-		Fields[["MonthPmc"]] <- x$PubmedData$History[[i]]$Month[[1]]
-		Fields[["DayPmc"]] <- x$PubmedData$History[[i]]$Day[[1]]
-		Fields[["MinutePmc"]] <- x$PubmedData$History[[i]]$Minute[[1]]
-		Fields[["HourPmc"]] <- x$PubmedData$History[[i]]$Hour[[1]]
+		try(Fields[["YearPmc"]] <- x$PubmedData$History[[i]]$Year[[1]], silent=TRUE) 
+		try(Fields[["MonthPmc"]] <- x$PubmedData$History[[i]]$Month[[1]], silent=TRUE) 
+		try(Fields[["DayPmc"]] <- x$PubmedData$History[[i]]$Day[[1]], silent=TRUE) 
+		try(Fields[["MinutePmc"]] <- x$PubmedData$History[[i]]$Minute[[1]], silent=TRUE) 
+		try(Fields[["HourPmc"]] <- x$PubmedData$History[[i]]$Hour[[1]], silent=TRUE) 
 	}		
 
 	if(any(pubmed_states == "pubmed")){
 		i <- which(pubmed_states == "pubmed")[1]
-		Fields[["YearPubmed"]] <- x$PubmedData$History[[i]]$Year[[1]]
-		Fields[["MonthPubmed"]] <- x$PubmedData$History[[i]]$Month[[1]]
-		Fields[["DayPubmed"]] <- x$PubmedData$History[[i]]$Day[[1]]
-		Fields[["MinutePubmed"]] <- x$PubmedData$History[[i]]$Minute[[1]]
-		Fields[["HourPubmed"]] <- x$PubmedData$History[[i]]$Hour[[1]]
+		try(Fields[["YearPubmed"]] <- x$PubmedData$History[[i]]$Year[[1]], silent=TRUE) 
+		try(Fields[["MonthPubmed"]] <- x$PubmedData$History[[i]]$Month[[1]], silent=TRUE) 
+		try(Fields[["DayPubmed"]] <- x$PubmedData$History[[i]]$Day[[1]], silent=TRUE) 
+		try(Fields[["MinutePubmed"]] <- x$PubmedData$History[[i]]$Minute[[1]], silent=TRUE) 
+		try(Fields[["HourPubmed"]] <- x$PubmedData$History[[i]]$Hour[[1]], silent=TRUE) 
 	}
 }
 
-Fields[["ISSN"]] <-  x$MedlineCitation$Article$Journal$ISSN[[1]]
-Fields[["Volume"]] <-  x$MedlineCitation$Article$Journal$JournalIssue$Volume[[1]]
-Fields[["Issue"]] <-  x$MedlineCitation$Article$Journal$JournalIssue$Issue[[1]]
-Fields[["Title"]] <-  x$MedlineCitation$Article$Journal$Title[[1]]
+try(Fields[["ISSN"]] <-  x$MedlineCitation$Article$Journal$ISSN[[1]], silent=TRUE) 
+try(Fields[["Volume"]] <-  x$MedlineCitation$Article$Journal$JournalIssue$Volume[[1]], silent=TRUE) 
+try(Fields[["Issue"]] <-  x$MedlineCitation$Article$Journal$JournalIssue$Issue[[1]], silent=TRUE) 
+try(Fields[["Title"]] <-  x$MedlineCitation$Article$Journal$Title[[1]], silent=TRUE) 
 
 if(!is.null(x$MedlineCitation$Article$ArticleTitle))
 	Fields[["ArticleTitle"]] <-  paste(unlist(x$MedlineCitation$Article[names(x$MedlineCitation$Article) == "ArticleTitle"]), collapse = "")
@@ -404,15 +404,15 @@ names(Fields) <- Tags
 
 Fields[["PMID"]] <- x$BookDocument$PMID[[1]]
 
-Fields[["YearRevised"]] <- x$BookDocument$DateRevised$Year[[1]]
-Fields[["MonthRevised"]] <- x$BookDocument$DateRevised$Month[[1]]
-Fields[["DayRevised"]] <- x$BookDocument$DateRevised$Day[[1]]
-Fields[["YearPubDate"]] <- x$BookDocument$Book$ContributionDate$Year[[1]]
-Fields[["MonthPubDate"]] <- x$BookDocument$Book$ContributionDate$Month[[1]]
-Fields[["DayPubDate"]] <- x$BookDocument$Book$ContributionDate$Day[[1]]
-Fields[["YearArticleDate"]] <- x$BookDocument$ArticleDate$Year[[1]]
-Fields[["MonthArticleDate"]] <- x$BookDocument$ArticleDate$Month[[1]]
-Fields[["DayArticleDate"]] <- x$BookDocument$ArticleDate$Day[[1]]
+try(Fields[["YearRevised"]] <- x$BookDocument$DateRevised$Year[[1]], silent=TRUE)
+try(Fields[["MonthRevised"]] <- x$BookDocument$DateRevised$Month[[1]], silent=TRUE)
+try(Fields[["DayRevised"]] <- x$BookDocument$DateRevised$Day[[1]], silent=TRUE)
+try(Fields[["YearPubDate"]] <- x$BookDocument$Book$ContributionDate$Year[[1]], silent=TRUE)
+try(Fields[["MonthPubDate"]] <- x$BookDocument$Book$ContributionDate$Month[[1]], silent=TRUE)
+try(Fields[["DayPubDate"]] <- x$BookDocument$Book$ContributionDate$Day[[1]], silent=TRUE)
+try(Fields[["YearArticleDate"]] <- x$BookDocument$ArticleDate$Year[[1]], silent=TRUE)
+try(Fields[["MonthArticleDate"]] <- x$BookDocument$ArticleDate$Month[[1]], silent=TRUE)
+try(Fields[["DayArticleDate"]] <- x$BookDocument$ArticleDate$Day[[1]], silent=TRUE)
 
 pubmed_states <- sapply(x$PubmedBookData$History, function(z) attr(z, "PubStatus"))
 
@@ -420,81 +420,81 @@ pubmed_states <- sapply(x$PubmedBookData$History, function(z) attr(z, "PubStatus
 if(length(pubmed_states) > 0){
 	if(any(pubmed_states == "entrez")){
 		i <- which(pubmed_states == "entrez")[1]
-		Fields[["YearEntrez"]] <- x$PubmedBookData$History[[i]]$Year[[1]]
-		Fields[["MonthEntrez"]] <- x$PubmedBookData$History[[i]]$Month[[1]]
-		Fields[["DayEntrez"]] <- x$PubmedBookData$History[[i]]$Day[[1]]
-		Fields[["MinuteEntrez"]] <- x$PubmedBookData$History[[i]]$Minute[[1]]
-		Fields[["HourEntrez"]] <- x$PubmedBookData$History[[i]]$Hour[[1]]
+		try(Fields[["YearEntrez"]] <- x$PubmedBookData$History[[i]]$Year[[1]], silent=TRUE)
+		try(Fields[["MonthEntrez"]] <- x$PubmedBookData$History[[i]]$Month[[1]], silent=TRUE)
+		try(Fields[["DayEntrez"]] <- x$PubmedBookData$History[[i]]$Day[[1]], silent=TRUE)
+		try(Fields[["MinuteEntrez"]] <- x$PubmedBookData$History[[i]]$Minute[[1]], silent=TRUE)
+		try(Fields[["HourEntrez"]] <- x$PubmedBookData$History[[i]]$Hour[[1]], silent=TRUE)
 	}
 	
 	if(any(pubmed_states == "medline")){
 		i <- which(pubmed_states == "medline")[1]
-		Fields[["YearMedline"]] <- x$PubmedBookData$History[[i]]$Year[[1]]
-		Fields[["MonthMedline"]] <- x$PubmedBookData$History[[i]]$Month[[1]]
-		Fields[["DayMedline"]] <- x$PubmedBookData$History[[i]]$Day[[1]]
-		Fields[["MinuteMedline"]] <- x$PubmedBookData$History[[i]]$Minute[[1]]
-		Fields[["HourMedline"]] <- x$PubmedBookData$History[[i]]$Hour[[1]]
+		try(Fields[["YearMedline"]] <- x$PubmedBookData$History[[i]]$Year[[1]], silent=TRUE)
+		try(Fields[["MonthMedline"]] <- x$PubmedBookData$History[[i]]$Month[[1]], silent=TRUE)
+		try(Fields[["DayMedline"]] <- x$PubmedBookData$History[[i]]$Day[[1]], silent=TRUE)
+		try(Fields[["MinuteMedline"]] <- x$PubmedBookData$History[[i]]$Minute[[1]], silent=TRUE)
+		try(Fields[["HourMedline"]] <- x$PubmedBookData$History[[i]]$Hour[[1]], silent=TRUE)
 	}	
 	
 	if(any(pubmed_states == "accepted")){
 		i <- which(pubmed_states == "accepted")[1]		
-		Fields[["YearAccepted"]] <- x$PubmedBookData$History[[i]]$Year[[1]]
-		Fields[["MonthAccepted"]] <- x$PubmedBookData$History[[i]]$Month[[1]]
-		Fields[["DayAccepted"]] <- x$PubmedBookData$History[[i]]$Day[[1]]
-		Fields[["MinuteAccepted"]] <- x$PubmedBookData$History[[i]]$Minute[[1]]
-		Fields[["HourAccepted"]] <- x$PubmedBookData$History[[i]]$Hour[[1]]
+		try(Fields[["YearAccepted"]] <- x$PubmedBookData$History[[i]]$Year[[1]], silent=TRUE)
+		try(Fields[["MonthAccepted"]] <- x$PubmedBookData$History[[i]]$Month[[1]], silent=TRUE)
+		try(Fields[["DayAccepted"]] <- x$PubmedBookData$History[[i]]$Day[[1]], silent=TRUE)
+		try(Fields[["MinuteAccepted"]] <- x$PubmedBookData$History[[i]]$Minute[[1]], silent=TRUE)
+		try(Fields[["HourAccepted"]] <- x$PubmedBookData$History[[i]]$Hour[[1]], silent=TRUE)
 	}	
 	
 	if(any(pubmed_states == "received")){
 		i <- which(pubmed_states == "received")[1]
-		Fields[["YearReceived"]] <- x$PubmedBookData$History[[i]]$Year[[1]]
-		Fields[["MonthReceived"]] <- x$PubmedBookData$History[[i]]$Month[[1]]
-		Fields[["DayReceived"]] <- x$PubmedBookData$History[[i]]$Day[[1]]
-		Fields[["MinuteReceived"]] <- x$PubmedBookData$History[[i]]$Minute[[1]]
-		Fields[["HourReceived"]] <- x$PubmedBookData$History[[i]]$Hour[[1]]
+		try(Fields[["YearReceived"]] <- x$PubmedBookData$History[[i]]$Year[[1]], silent=TRUE)
+		try(Fields[["MonthReceived"]] <- x$PubmedBookData$History[[i]]$Month[[1]], silent=TRUE)
+		try(Fields[["DayReceived"]] <- x$PubmedBookData$History[[i]]$Day[[1]], silent=TRUE)
+		try(Fields[["MinuteReceived"]] <- x$PubmedBookData$History[[i]]$Minute[[1]], silent=TRUE)
+		try(Fields[["HourReceived"]] <- x$PubmedBookData$History[[i]]$Hour[[1]], silent=TRUE)
 	}	
 	
 	if(any(pubmed_states == "epublish")){
 		i <- which(pubmed_states == "epublish")[1]
-		Fields[["YearEpublish"]] <- x$PubmedBookData$History[[i]]$Year[[1]]
-		Fields[["MonthEpublish"]] <- x$PubmedBookData$History[[i]]$Month[[1]]
-		Fields[["DayEpublish"]] <- x$PubmedBookData$History[[i]]$Day[[1]]
-		Fields[["MinuteEpublish"]] <- x$PubmedBookData$History[[i]]$Minute[[1]]
-		Fields[["HourEpublish"]] <- x$PubmedBookData$History[[i]]$Hour[[1]]
+		try(Fields[["YearEpublish"]] <- x$PubmedBookData$History[[i]]$Year[[1]], silent=TRUE)
+		try(Fields[["MonthEpublish"]] <- x$PubmedBookData$History[[i]]$Month[[1]], silent=TRUE)
+		try(Fields[["DayEpublish"]] <- x$PubmedBookData$History[[i]]$Day[[1]], silent=TRUE)
+		try(Fields[["MinuteEpublish"]] <- x$PubmedBookData$History[[i]]$Minute[[1]], silent=TRUE)
+		try(Fields[["HourEpublish"]] <- x$PubmedBookData$History[[i]]$Hour[[1]], silent=TRUE)
 	}			
 
 	if(any(pubmed_states == "ppublish")){
 		i <- which(pubmed_states == "ppublish")[1]
-		Fields[["YearPpublish"]] <- x$PubmedBookData$History[[i]]$Year[[1]]
-		Fields[["MonthPpublish"]] <- x$PubmedBookData$History[[i]]$Month[[1]]
-		Fields[["DayPpublish"]] <- x$PubmedBookData$History[[i]]$Day[[1]]
-		Fields[["MinutePpublish"]] <- x$PubmedBookData$History[[i]]$Minute[[1]]
-		Fields[["HourPpublish"]] <- x$PubmedBookData$History[[i]]$Hour[[1]]
+		try(Fields[["YearPpublish"]] <- x$PubmedBookData$History[[i]]$Year[[1]], silent=TRUE)
+		try(Fields[["MonthPpublish"]] <- x$PubmedBookData$History[[i]]$Month[[1]], silent=TRUE)
+		try(Fields[["DayPpublish"]] <- x$PubmedBookData$History[[i]]$Day[[1]], silent=TRUE)
+		try(Fields[["MinutePpublish"]] <- x$PubmedBookData$History[[i]]$Minute[[1]], silent=TRUE)
+		try(Fields[["HourPpublish"]] <- x$PubmedBookData$History[[i]]$Hour[[1]], silent=TRUE)
 	}	
 	
 	if(any(pubmed_states == "pmc")){
 		i <- which(pubmed_states == "pmc")
-		Fields[["YearPmc"]] <- x$PubmedBookData$History[[i]]$Year[[1]]
-		Fields[["MonthPmc"]] <- x$PubmedBookData$History[[i]]$Month[[1]]
-		Fields[["DayPmc"]] <- x$PubmedBookData$History[[i]]$Day[[1]]
-		Fields[["MinutePmc"]] <- x$PubmedBookData$History[[i]]$Minute[[1]]
-		Fields[["HourPmc"]] <- x$PubmedBookData$History[[i]]$Hour[[1]]
+		try(Fields[["YearPmc"]] <- x$PubmedBookData$History[[i]]$Year[[1]], silent=TRUE)
+		try(Fields[["MonthPmc"]] <- x$PubmedBookData$History[[i]]$Month[[1]], silent=TRUE)
+		try(Fields[["DayPmc"]] <- x$PubmedBookData$History[[i]]$Day[[1]], silent=TRUE)
+		try(Fields[["MinutePmc"]] <- x$PubmedBookData$History[[i]]$Minute[[1]], silent=TRUE)
+		try(Fields[["HourPmc"]] <- x$PubmedBookData$History[[i]]$Hour[[1]], silent=TRUE)
 	}		
 
 	if(any(pubmed_states == "pubmed")){
 		i <- which(pubmed_states == "pubmed")[1]
-		Fields[["YearPubmed"]] <- x$PubmedBookData$History[[i]]$Year[[1]]
-		Fields[["MonthPubmed"]] <- x$PubmedBookData$History[[i]]$Month[[1]]
-		Fields[["DayPubmed"]] <- x$PubmedBookData$History[[i]]$Day[[1]]
-		Fields[["MinutePubmed"]] <- x$PubmedBookData$History[[i]]$Minute[[1]]
-		Fields[["HourPubmed"]] <- x$PubmedBookData$History[[i]]$Hour[[1]]
+		try(Fields[["YearPubmed"]] <- x$PubmedBookData$History[[i]]$Year[[1]], silent=TRUE)
+		try(Fields[["MonthPubmed"]] <- x$PubmedBookData$History[[i]]$Month[[1]], silent=TRUE)
+		try(Fields[["DayPubmed"]] <- x$PubmedBookData$History[[i]]$Day[[1]], silent=TRUE)
+		try(Fields[["MinutePubmed"]] <- x$PubmedBookData$History[[i]]$Minute[[1]], silent=TRUE)
+		try(Fields[["HourPubmed"]] <- x$PubmedBookData$History[[i]]$Hour[[1]], silent=TRUE)
 	}
 }
 
-Fields[["ISSN"]] <-  x$BookDocument$Article$Journal$ISSN[[1]]
-Fields[["Volume"]] <-  x$BookDocument$Article$Journal$JournalIssue$Volume[[1]]
-Fields[["Issue"]] <-  x$BookDocument$Article$Journal$JournalIssue$Issue[[1]]
-Fields[["Title"]] <-  x$BookDocument$Article$Journal$JournalIssue$Title[[1]]
+try(Fields[["ISSN"]] <-  x$BookDocument$Article$Journal$ISSN[[1]], silent=TRUE) 
+try(Fields[["Volume"]] <-  x$BookDocument$Article$Journal$JournalIssue$Volume[[1]], silent=TRUE)
+try(Fields[["Issue"]] <-  x$BookDocument$Article$Journal$JournalIssue$Issue[[1]], silent=TRUE)
+try(Fields[["Title"]] <-  x$BookDocument$Article$Journal$JournalIssue$Title[[1]], silent=TRUE)
 
 if(!is.null(x$BookDocument$ArticleTitle))
 	Fields[["ArticleTitle"]] <-  paste(unlist(x$BookDocument[names(x$BookDocument) == "ArticleTitle"]), collapse = "")
@@ -580,23 +580,23 @@ if(!is.null(x$BookDocument$Abstract)){
 	Fields[["AbstractText"]] <- AbstractText
 }
 
-Fields[["Language"]] <- x$BookDocument$Language[[1]]
-Fields[["PublicationType"]] <- x$BookDocument$Book$PublicationType[[1]]
-Fields[["Country"]] <- x$BookDocument$Article$Country[[1]]
-Fields[["MedlineTA"]] <- x$BookDocument$Article$MedlineTA[[1]]
-Fields[["NlmUniqueID"]] <- x$BookDocument$Article$NlmUniqueID[[1]]
-Fields[["ISSNLinking"]] <- x$BookDocument$Article$ISSNLinking[[1]]
-Fields[["PublicationStatus"]] <- x$PubmedBookData$PublicationStatus[[1]]
-Fields[["ArticleId"]] <- x$BookDocument$ArticleIdList$ArticleId[[1]]
-Fields[["ISOAbbreviation"]] <- x$BookDocument$Article$Journal$ISOAbbreviation[[1]]
-Fields[["MedlinePgn"]] <- x$BookDocument$Article$Pagination$MedlinePgn[[1]]
-Fields[["CopyrightInformation"]] <- x$BookDocument$Abstract$CopyrightInformation[[1]]
-Fields[["BookPublisher"]] <- x$BookDocument$Book$Publisher$PublisherName[[1]]
-Fields[["BookPublisherLocation"]] <- x$BookDocument$Book$Publisher$PublisherLocation[[1]]
-Fields[["BookTitle"]] <- x$BookDocument$Book$BookTitle[[1]]
-Fields[["BookBeginningDate"]] <- x$BookDocument$Book$BeginningDate$Year[[1]]
-Fields[["BookEndingDate"]] <- x$BookDocument$Book$EndingDate$Year[[1]]
-Fields[["BookMedium"]] <- x$BookDocument$Book$Medium[[1]]
+try(Fields[["Language"]] <- x$BookDocument$Language[[1]], silent=TRUE)
+try(Fields[["PublicationType"]] <- x$BookDocument$Book$PublicationType[[1]], silent=TRUE)
+try(Fields[["Country"]] <- x$BookDocument$Article$Country[[1]], silent=TRUE)
+try(Fields[["MedlineTA"]] <- x$BookDocument$Article$MedlineTA[[1]], silent=TRUE)
+try(Fields[["NlmUniqueID"]] <- x$BookDocument$Article$NlmUniqueID[[1]], silent=TRUE)
+try(Fields[["ISSNLinking"]] <- x$BookDocument$Article$ISSNLinking[[1]], silent=TRUE)
+try(Fields[["PublicationStatus"]] <- x$PubmedBookData$PublicationStatus[[1]], silent=TRUE)
+try(Fields[["ArticleId"]] <- x$BookDocument$ArticleIdList$ArticleId[[1]], silent=TRUE)
+try(Fields[["ISOAbbreviation"]] <- x$BookDocument$Article$Journal$ISOAbbreviation[[1]], silent=TRUE)
+try(Fields[["MedlinePgn"]] <- x$BookDocument$Article$Pagination$MedlinePgn[[1]], silent=TRUE)
+try(Fields[["CopyrightInformation"]] <- x$BookDocument$Abstract$CopyrightInformation[[1]], silent=TRUE)
+try(Fields[["BookPublisher"]] <- x$BookDocument$Book$Publisher$PublisherName[[1]], silent=TRUE)
+try(Fields[["BookPublisherLocation"]] <- x$BookDocument$Book$Publisher$PublisherLocation[[1]], silent=TRUE)
+try(Fields[["BookTitle"]] <- x$BookDocument$Book$BookTitle[[1]], silent=TRUE)
+try(Fields[["BookBeginningDate"]] <- x$BookDocument$Book$BeginningDate$Year[[1]], silent=TRUE)
+try(Fields[["BookEndingDate"]] <- x$BookDocument$Book$EndingDate$Year[[1]], silent=TRUE)
+try(Fields[["BookMedium"]] <- x$BookDocument$Book$Medium[[1]], silent=TRUE)
 
 
 if(!is.null(x$BookDocument$GrantList)){
