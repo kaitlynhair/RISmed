@@ -114,10 +114,49 @@ EUtilsGet <- function(x, type="efetch", db="pubmed"){
 
 	if(type=="efetch"&db=="pubmed"){
 		
-		Result <- Medline(Result, query)
+		records <- Medline(Result, query)
 	}
 			
-Result
+	authors<-vector()
+	author1<-vector()
+	for(n in 1:length(records@Author)){
+	  try(tmp<-paste0(records@Author[[n]]$LastName,", ",records@Author[[n]]$Initials), silent=TRUE)
+	  try(tmp2<-paste(tmp, collapse="; "), silent=TRUE)
+	  
+	  if(length(tmp2)>1){
+	    authors<-append(authors,tmp2)
+	  }
+	  
+	  else{
+	    authors<-append(authors,NA)
+	  }
+	  
+	  try(author1<-append(author1,records@Author[[n]]$LastName[1]), silent=TRUE)
+	}
+	
+	max_length <- max(c(length(authors), 
+	                    length(ArticleTitle(records)),
+	                    length(MedlinePgn(records)), 
+	                    length(Issue(records)),
+	                    length(Volume(records)),
+	                    length(YearPubmed(records)),
+	                    length(PMID(records)),
+	                    length(ELocationID(records))))
+	                                            
+	pubmed_data <- data.frame("author" = authors,
+	                          "title" = c(ArticleTitle(records),rep(NA, max_length - length(ArticleTitle(records)))),
+	                          "pages" = c(MedlinePgn(records),rep(NA, max_length - length(MedlinePgn(records)))),
+	                          "issue" = c(Issue(records) ,rep(NA, max_length - length(Issue(records)))),
+	                          "volume" = c(Volume(records),rep(NA, max_length - length(Volume(records)))),
+	                          "year" = c(YearPubmed(records),rep(NA, max_length - length(YearPubmed(records)))),
+	                          "pmid" = c(PMID(records),rep(NA, max_length - length(PMID(records)))),
+	                          "doi" = c(ELocationID(records),rep(NA, max_length - length(ELocationID(records)))))
+	
+	pubmed_data <- pubmed_data %>%
+	  mutate(url= paste0("https://www.ncbi.nlm.nih.gov/pubmed/",
+	                     PMID(records)))
+	
+	pubmed_data
 }
 
 
