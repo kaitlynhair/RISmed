@@ -181,6 +181,7 @@ EUtilsGet <- function(x, type="efetch", db="pubmed"){
 	
 	pubmed_data[pubmed_data == "NA" ] <- NA
 	
+	pubmed_data$uid <- paste0("pubmed-", pubmed_data$pmid)
 	pubmed_data
 }
 
