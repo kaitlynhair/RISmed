@@ -185,7 +185,7 @@ EUtilsGet <- function(x, type="efetch", db="pubmed"){
 	pubmed_data$uid <- paste0("pubmed-", pubmed_data$pmid)
 	pubmed_data$source <- "pubmed"
 	
-	return(pubmed_data)
+	pubmed_data
 }
 
 
