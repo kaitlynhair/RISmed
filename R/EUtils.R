@@ -163,7 +163,7 @@ EUtilsGet <- function(x, type="efetch", db="pubmed"){
 	pubmed_data <- data.frame("author" = authors,
 	                          "keywords" = keywords,
 	                          "abstract" = AbstractText(records),
-	                          "country" = country,
+	                          "author_country" = country,
 	                          "title" = ArticleTitle(records),
 	                          "pages" = MedlinePgn(records),
 	                          "issue" = Issue(records), 
@@ -177,12 +177,14 @@ EUtilsGet <- function(x, type="efetch", db="pubmed"){
 	
 	pubmed_data <- pubmed_data %>%
 	  mutate(url= paste0("https://www.ncbi.nlm.nih.gov/pubmed/",
-	                     PMID(records))) 
+	                     PMID(records))) %>%
+	  mutate_if(is.factor, as.character)
 	
 	pubmed_data[pubmed_data == "NA" ] <- NA
 	
 	pubmed_data$uid <- paste0("pubmed-", pubmed_data$pmid)
-	pubmed_data
+	pubmed_data$source <- "pubmed"
+	
 }
 
 
