@@ -119,44 +119,62 @@ EUtilsGet <- function(x, type="efetch", db="pubmed"){
 			
 	authors<-vector()
 	for(n in 1:length(records@Author)){
+	  if(exists("tmp")){rm(tmp)}
+	  if(exists("tmp2")){rm(tmp2)}
 	  try(tmp<-paste0(records@Author[[n]]$LastName,", ",records@Author[[n]]$Initials), silent=TRUE)
 	  try(tmp2<-paste(tmp, collapse="; "), silent=TRUE)
 	  
-	  if(length(tmp2)>0){
-	    authors<-append(authors,tmp2)
-	  }
-	  
-	  else{
-	    authors<-append(authors,NA)
-	  }
-	}
+	  if(exists("tmp2")){
+      
+            if(length(tmp2)>0){
+              authors<-append(authors,tmp2)
+            } else{
+              authors<-append(authors,NA)
+            }
+      
+          } else{
+            authors<-append(authors,NA)
+          }
+        }
 	
 	country <- vector()
 	for(n in 1:length(records@Country)){
+	  if(exists("tmp")){rm(tmp)}
+	  if(exists("tmp2")){rm(tmp2)}
 	  try(tmp<-paste0(records@Country[[n]]), silent=TRUE)
 	  try(tmp2<-paste(tmp, collapse="; "), silent=TRUE)
 	  
-	  if(length(tmp2)>0){
-	    country<-append(country,tmp2)
-	  }
-	  
-	  else{
-	    country<-append(country,NA)
-	  }
+	  if(exists("tmp2")){
+      
+            if(length(tmp2)>0){
+              country<-append(country,tmp2)
+            } else{
+             country<-append(country,NA)
+            }
+      
+          } else{
+            country<-append(country,NA)
+          }
 	}
 	
 	keywords<-vector()
 	for(n in 1:length(records@Keywords)){
+	  if(exists("tmp")){rm(tmp)}
+          if(exists("tmp2")){rm(tmp2)}
 	  try(tmp<-paste0(records@Keywords[[n]]), silent=TRUE)
 	  try(tmp2<-paste(tmp, collapse="; "), silent=TRUE)
 	  
-	  if(length(tmp2)>0){
-	    keywords<-append(keywords,tmp2)
-	  }
-	  
-	  else{
-	    keywords<-append(keywords,NA)
-	  }
+	  if(exists("tmp2")){
+      
+            if(length(tmp2)>0){
+              keywords<-append(keywords,tmp2)
+            } else{
+              keywords<-append(keywords,NA)
+            }
+      
+          } else{
+            keywords<-append(keywords,NA)
+          }
 	}
 	
 	
