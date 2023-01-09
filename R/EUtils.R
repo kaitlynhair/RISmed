@@ -194,9 +194,9 @@ EUtilsGet <- function(x, type="efetch", db="pubmed"){
 	
 	
 	pubmed_data <- pubmed_data %>%
-	  mutate(url= paste0("https://www.ncbi.nlm.nih.gov/pubmed/",
+	  dplyr::mutate(url= paste0("https://www.ncbi.nlm.nih.gov/pubmed/",
 	                     PMID(records))) %>%
-	  mutate_if(is.factor, as.character)
+	  dplyr::mutate_if(is.factor, as.character)
 	
 	pubmed_data[pubmed_data == "NA" ] <- NA
 	
