@@ -97,6 +97,7 @@ SplitIDs <- function(ids){
 
 }
 
+#' @export
 #' @import dplyr
 EUtilsGet <- function(x, type="efetch", db="pubmed"){
 
