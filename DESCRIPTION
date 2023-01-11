@@ -17,4 +17,5 @@ NeedsCompilation: no
 Packaged: 2016-11-02 00:05:19 UTC; skovalchik
 Author: Stephanie Kovalchik [aut, cre]
 Maintainer: Stephanie Kovalchik <s.a.kovalchik@gmail.com>
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.3
+Encoding: UTF-8

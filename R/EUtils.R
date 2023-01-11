@@ -97,7 +97,7 @@ SplitIDs <- function(ids){
 
 }
 
-
+#' @import dplyr
 EUtilsGet <- function(x, type="efetch", db="pubmed"){
 
 	if(class(x)[1]=="EUtilsSummary"){
